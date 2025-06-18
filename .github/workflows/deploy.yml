@@ -3,22 +3,20 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main  # Ganti ke 'master' kalau branch-mu bukan 'main'
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy via SSH
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
+          username: root
           key: ${{ secrets.VPS_KEY }}
+          port: 22
           script: |
-            cd /path/to/odoo_project
+            cd /root/odoo_project
             git pull origin main
             docker compose restart
