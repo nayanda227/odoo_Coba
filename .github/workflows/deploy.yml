@@ -17,7 +17,6 @@ jobs:
           key: ${{ secrets.VPS_KEY }}
           port: 22
           script: |
-            cd /root/odoo_Coba      
+            cd /root/odoo_Coba
             git pull origin main
             docker compose restart
-
